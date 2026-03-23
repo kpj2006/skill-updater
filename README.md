@@ -1,22 +1,59 @@
 # skill_updater v2
 
-Analyses your own Discord messages, scores skill/reference files for relevance
-using Ollama embeddings, then **auto-patches** your skill files in place.
-No confirmation prompts. No separate suggestions file. Changes go straight in.
+**Automatically document your team's knowledge from Discord conversations.**
+
+Analyses your Discord messages, uses AI embeddings to score which skill files are relevant,
+then generates and **directly applies structured edits** to update your skill documentation.
+No manual copy-paste. No separate suggestions files. No confirmation prompts needed.
+
+## What it does
 
 ```
-Discord messages
-      │
-      ▼  noise filter
-      │
-      ▼  Ollama embeddings  ←── skills/ folder
-      │  (relevance score)
-      │
-      ▼  Ollama generation  ←── relevant files + messages
-      │  (structured JSON)
-      │
-      ▼  skill_patcher
-         writes edits directly to skill.md + reference files
+Your Discord messages (8 messages found)
+      ↓
+      ├─ Noise filter        (remove "ok", "thanks", etc)
+      ├─ Embedding scorer    (which files are relevant?)
+      ├─ LLM generation      (what edits should be made?)
+      └─ Auto-patcher        (apply edits in-place)
+
+Result: skill.md, references/*.md, scripts/* are updated automatically
+```
+
+## Key Features
+
+✅ **Learns from your team** — Watches Discord, extracts knowledge
+✅ **Smart filtering** — Ignores noise, focuses on substance
+✅ **Selective patching** — Only updates relevant files (saves tokens, faster)
+✅ **Direct updates** — Changes go straight to disk, ready to git diff/commit
+✅ **Safe by default** — Logs all changes, never corrupts files
+✅ **Easy audit trail** — All ops logged, rollback with git checkout
+
+
+```bash
+python main.py --days 7
+
+```
+
+**What you'll see:**
+- `[Step 1]` — 8+ messages fetched from Discord
+- `[Step 2]` — 5 skill files loaded
+- `[Step 3]` — 3 files scored as relevant
+- `[Step 4]` — ~XX edits generated
+- `[Step 5]` — 3 edits applied successfully
+- Then: open `.skills/skill.md` — new sections auto-added
+
+### Example Discord Messages for Better Demo Results
+
+Post these to see impressive auto-documentation:
+
+```
+1. How do we handle async/await patterns? I notice inconsistent error handling — should we standardize on try-catch or .catch() chains?
+
+2. Documentation gap: we need a PR validation checklist. Must include: test coverage >80%, no console.log, JSDoc on all functions.
+
+3. Security issue: no rate limiting on login endpoint. Should enforce max 5 attempts per minute per IP.
+
+4. Performance: cache user sessions for 5 minutes instead of hitting DB every request. Could reduce load by 30%.
 ```
 
 ---
@@ -37,9 +74,8 @@ skill_updater/
 
 ## Prerequisites
 
-- Python 3.10+  (uses `X | Y` type hints)
-- Ollama running locally — `ollama serve`
-- A Discord bot with **Read Message History** in your target channel
+- **Python 3.10+** (uses `X | Y` type hints)
+- **Discord bot** with Read Message History permission in target channel
 
 ---
 
@@ -141,6 +177,14 @@ python main.py --days 7 >> skill_updater.log 2>&1
 ```
 
 Task Scheduler → Create Basic Task → Weekly, Monday 9:00 AM → point to `run.bat`
+
+---
+
+## Why This Matters
+
+**The problem:** Team knowledge lives in Discord but never makes it into docs and skills.
+**The result:** New team members get lost, decisions repeat, standards drift.
+**No manual documentation burden.** Knowledge captured at moment of discussion.
 
 ---
 
