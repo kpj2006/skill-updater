@@ -21,6 +21,17 @@ Discord REST API → role filter → cosine similarity (nomic-embed-text)
 - Git-backed output = auditable change history
 - Zero cloud cost (fully local)
 
+**POC Demonstrations:**
+
+![POC Execution Log](public/mvp-skill_log.png)
+*Detailed execution log showing the complete pipeline: Discord fetch → embedding filter → skill file matching → LLM generation → JSON patch application*
+
+![Full IDE Environment](public/mvp1.png)
+*End-to-end system integration: VS Code editor with project structure on left, showing all Python modules (discord_fetcher, ollama_client, prompt_builder, skill_patcher) running in terminal with real-time execution flow*
+
+![Execution Summary Results](public/mvp2.png)
+*Zoomed execution summary demonstrating the successful completion of all 6 pipeline steps with final patch application results (2 edits applied, 0 failures)*
+
 **Known limitations that the roadmap addresses:**
 - Flat file scan (O(n) per message, not semantic index)
 - No topic grouping — each message treated independently
