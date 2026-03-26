@@ -39,6 +39,8 @@ Discord REST API → role filter → cosine similarity (nomic-embed-text)
 - No feedback loop from Skill Bot's low-confidence answers
 - Manual CLI trigger only — no scheduled automation
 
+**video tutorial**: https://www.youtube.com/watch?v=xMHPiydEukE
+
 ---
 
 ## Phase 0 — Stability Hardening (Current Sprint)
