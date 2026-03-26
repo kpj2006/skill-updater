@@ -39,6 +39,8 @@ Discord REST API → role filter → cosine similarity (nomic-embed-text)
 - No feedback loop from Skill Bot's low-confidence answers
 - Manual CLI trigger only — no scheduled automation
 
+**video tutorial**: https://www.youtube.com/watch?v=xMHPiydEukE
+
 ---
 
 ## Phase 0 — Stability Hardening (Current Sprint)
@@ -277,3 +279,16 @@ Skills Core → powers Skill Bot → gaps feed back to Skill Updater
 3. **Git-backed output** — every skill change is a reviewable commit
 4. **Provenance** — every patch traces to its source Discord messages
 5. **Incremental, not batch** — new messages extend the model, never trigger full retraining
+<<<<<<< HEAD
+=======
+
+---
+
+## References
+
+- [BERTopic Online Learning](https://maartengr.github.io/BERTopic/getting_started/online/online.html) — incremental topic modeling
+- [BERTopic merge_models](https://www.maartengrootendorst.com/blog/bertopic/) — daily model merging pattern
+- [RepoAgent](https://github.com/OpenBMB/RepoAgent) — LLM-powered doc update with Git change detection
+- [HDBSCAN incremental limitation](https://arxiv.org/html/2601.20680) — why raw HDBSCAN fails in production streaming pipelines
+- [ChromaDB persistent client](https://docs.trychroma.com/reference/py-client) — self-hosted vector index
+>>>>>>> 5398356ec056c224eb7bacb6f6d225386c297f27
